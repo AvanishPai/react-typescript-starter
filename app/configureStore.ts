@@ -15,8 +15,8 @@ export default function configureStore(initialState = {}, history) {
   /* istanbul ignore next */
   if (process.env.NODE_ENV !== 'production' && typeof window === 'object') {
     /* eslint-disable no-underscore-dangle */
-    if (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
-      composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({});
+    if ((window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
+      composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({});
 
     // NOTE: Uncomment the code below to restore support for Redux Saga
     // Dev Tools once it supports redux-saga version 1.x.x
@@ -36,7 +36,7 @@ export default function configureStore(initialState = {}, history) {
 
   const enhancers = [applyMiddleware(...middlewares)];
 
-  const store = createStore(
+  const store:any = createStore(
     createReducer(),
     initialState,
     composeEnhancers(...enhancers),
@@ -49,8 +49,8 @@ export default function configureStore(initialState = {}, history) {
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
   /* istanbul ignore next */
-  if (module.hot) {
-    module.hot.accept('./reducers', () => {
+  if ((module as any).hot) {
+    (module as any).hot.accept('./reducers', () => {
       store.replaceReducer(createReducer(store.injectedReducers));
     });
   }
