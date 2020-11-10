@@ -8,7 +8,7 @@ const loadable: (
 
   return (props) => (
     <Suspense fallback={fallback}>
-      <LazyComponent {...props} />
+      <LazyComponent {...props} /> 
     </Suspense>
   );
 };
