@@ -4,6 +4,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const babelConfig = require('../../config/babel.config');
 
 module.exports = (options) => ({
   mode: options.mode,
@@ -24,7 +25,7 @@ module.exports = (options) => ({
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: options.babelQuery,
+          options: babelConfig,
         },
       },
       {
